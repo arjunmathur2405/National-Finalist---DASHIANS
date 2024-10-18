@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>D.A.S.H - Digital Answer Sheet Handler</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='styles.css') }}"
+		/>
+	</head>
+
+	<body
+		style="background-image: url('{{ url_for('static', filename='images/bg.png') }}'); background-size: contain;"
+	>
+		<nav class="navbar">
+			<div class="navbar-left">
+				<span class="title">D.A.S.H</span>
+			</div>
+			<div class="navbar-center">
+				<a href="#features">Features</a>
+				<a href="#faq">FAQ</a>
+				<a href="#about">About Us</a>
+				<a href="#contact">Contact Us</a>
+			</div>
+			<div class="navbar-right">
+				<button id="darkModeToggle">☀️</button>
+			</div>
+		</nav>
+
+		<header class="header home">
+			<div class="header-content">
+				<h1>Welcome to D.A.S.H</h1>
+				<p>Digital Answer Sheet Handler</p>
+				<br />
+				<a href="{{ url_for('login') }}" class="get-started"
+					>Get Started</a
+				><br />
+			</div>
+		</header>
+
+		<section id="features" class="features">
+			<h2>Features</h2>
+			<div class="features-container">
+				<div class="feature-card">
+					<img src="../static/images/feature-1.png" alt="Feature 1" />
+					<h3>Feature 1</h3>
+					<p>Description of Feature 1</p>
+				</div>
+				<div class="feature-card">
+					<img src="../static/images/feature-2.png" alt="Feature 2" />
+					<h3>Feature 2</h3>
+					<p>Description of Feature 2</p>
+				</div>
+				<div class="feature-card">
+					<img src="../static/images/feature-3.png" alt="Feature 3" />
+					<h3>Feature 3</h3>
+					<p>Description of Feature 3</p>
+				</div>
+				<div class="feature-card">
+					<img src="../static/images/feature-4.png" alt="Feature 4" />
+					<h3>Feature 4</h3>
+					<p>Description of Feature 4</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="faq" class="faq">
+			<h2>Frequently Asked Questions</h2>
+			<div class="faq-item">
+				<button class="faq-question">What is D.A.S.H?</button>
+				<div class="faq-answer">
+					<p>
+						D.A.S.H is a Digital Answer Sheet Handler designed to
+						simplify the process of answer sheet evaluation.
+					</p>
+				</div>
+			</div>
+			<div class="faq-item">
+				<button class="faq-question">How does it work?</button>
+				<div class="faq-answer">
+					<p>
+						D.A.S.H uses advanced algorithms to evaluate answer
+						sheets accurately and efficiently.
+					</p>
+				</div>
+			</div>
+			<div class="faq-item">
+				<button class="faq-question">Is D.A.S.H secure?</button>
+				<div class="faq-answer">
+					<p>
+						Yes, D.A.S.H implements the latest security protocols to
+						protect user data.
+					</p>
+				</div>
+			</div>
+			<div class="faq-item">
+				<button class="faq-question">How can I get started?</button>
+				<div class="faq-answer">
+					<p>
+						You can start by clicking the "Get Started" button above
+						to explore the features of D.A.S.H.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="about" class="about">
+			<h2>About Us</h2>
+			<p>
+				D.A.S.H is developed by a team of experts in digital education
+				solutions. We aim to streamline the evaluation process for
+				educators worldwide.
+			</p>
+		</section>
+
+		<section id="contact" class="contact">
+			<h2>Contact Us</h2>
+			<form
+				action="mailto:support@dash.com"
+				method="post"
+				enctype="text/plain"
+			>
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name" required />
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" required />
+				<label for="message">Message:</label>
+				<textarea
+					id="message"
+					name="message"
+					rows="4"
+					required
+				></textarea>
+				<button type="submit">Send Message</button>
+			</form>
+		</section>
+
+		<footer>
+			<p>2024 &copy; D.A.S.H</p>
+		</footer>
+
+		<script src="{{ url_for('static', filename='script.js') }}"></script>
+	</body>
+</html>

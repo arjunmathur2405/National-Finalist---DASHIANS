@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Signup</title>
+		<style>
+			body {
+				background-image: url("{{ url_for("static", filename="images/bg.png") }}");
+				background-size: contain;
+				font-family: "Arial", sans-serif;
+				background-color: lightblue;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				margin: 0;
+			}
+
+			.signup-container {
+				background-color: white;
+				border-radius: 20px;
+				box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
+				width: 400px;
+				padding: 40px;
+				text-align: center;
+				animation: fadeIn 0.8s ease-out;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			h1 {
+				font-size: 28px;
+				margin-bottom: 30px;
+				color: #007bff;
+			}
+
+			label {
+				font-size: 16px;
+				margin-bottom: 10px;
+				display: block;
+				text-align: left;
+				color: #333;
+			}
+
+			input[type="text"],
+			input[type="password"],
+			select {
+				width: calc(100% - 20px);
+				padding: 12px;
+				margin-bottom: 20px;
+				border: 1px solid #ccc;
+				border-radius: 10px;
+				font-size: 16px;
+				transition: border-color 0.3s;
+			}
+
+			input[type="text"]:focus,
+			input[type="password"]:focus,
+			select:focus {
+				border-color: #007bff;
+				outline: none;
+			}
+
+			button {
+				width: 100%;
+				padding: 12px;
+				background-color: #007bff;
+				color: white;
+				border: none;
+				border-radius: 10px;
+				cursor: pointer;
+				font-size: 16px;
+				transition: background-color 0.3s;
+			}
+
+			button:hover {
+				background-color: #0056b3;
+			}
+
+			a {
+				display: block;
+				margin-top: 20px;
+				color: #007bff;
+				text-decoration: none;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
+
+			/* Modal Popup Styling */
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.9);
+			}
+
+			.modal-content {
+				background-color: white;
+				margin: 15% auto;
+				padding: 20px;
+				border-radius: 10px;
+				width: 300px;
+				text-align: center;
+			}
+
+			.close-btn {
+				background-color: #007bff;
+				color: white;
+				padding: 10px 20px;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				font-size: 16px;
+			}
+
+			.close-btn:hover {
+				background-color: #0056b3;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="signup-container">
+			<h1>Signup</h1>
+			<form method="POST" action="{{ url_for('signup') }}">
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" required />
+
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" required />
+
+				<label for="designation">Designation:</label>
+				<select id="designation" name="designation" required>
+					<option value="" disabled selected>
+						Select your designation
+					</option>
+					<option value="admin">Admin</option>
+					<option value="student">Student</option>
+					<option value="teacher">Teacher</option>
+				</select>
+
+				<button type="submit">Signup</button>
+			</form>
+			<a href="{{ url_for('login') }}">Already have an account? Login</a>
+		</div>
+
+		<!-- Modal Popup for Error or Success -->
+		<div id="messageModal" class="modal">
+			<div class="modal-content">
+				<p id="modalMessage"></p>
+				<button class="close-btn" id="closeModalBtn">OK</button>
+			</div>
+		</div>
+
+		<script>
+			// Display the modal if there is a flash message
+			{% with messages = get_flashed_messages(with_categories=true) %}
+			    {% if messages %}
+			        document.getElementById('messageModal').style.display = 'block';
+			        {% for category, message in messages %}
+			            document.getElementById('modalMessage').textContent = "{{ message }}";
+			        {% endfor %}
+			    {% endif %}
+			{% endwith %}
+
+			// Close the modal when the OK button is clicked
+			document.getElementById('closeModalBtn').addEventListener('click', function() {
+			    document.getElementById('messageModal').style.display = 'none';
+			});
+
+			// Close the modal when clicking outside of it
+			window.onclick = function(event) {
+			    const modal = document.getElementById('messageModal');
+			    if (event.target === modal) {
+			        modal.style.display = 'none';
+			    }
+			};
+		</script>
+	</body>
+</html>

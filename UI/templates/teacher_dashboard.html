@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Teacher Dashboard</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		/>
+		<style>
+			body {
+				display: flex;
+				height: 100vh;
+				margin: 0;
+				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+				background: #f0f2f5;
+				overflow: hidden;
+			}
+
+			.sidebar {
+				width: 300px;
+				background: #007bff;
+				color: #fff;
+				padding: 20px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+				transition: all 0.3s ease;
+			}
+
+			.sidebar:hover {
+				width: 320px;
+			}
+
+			.sidebar h2 {
+				margin: 0;
+				font-size: 28px;
+				font-weight: 600;
+				text-align: center;
+				transition: color 0.3s ease;
+			}
+
+			.sidebar h2:hover {
+				color: #e2e2e2;
+			}
+
+			.sidebar a {
+				text-decoration: none;
+				color: #fff;
+				padding: 15px;
+				display: block;
+				margin: 10px 0;
+				border-radius: 8px;
+				transition: background 0.3s, transform 0.3s;
+			}
+
+			.sidebar a:hover {
+				background: #0056b3;
+				transform: translateX(10px);
+			}
+
+			.main-content {
+				flex: 1;
+				padding: 0;
+				/* Remove padding to use full screen space */
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				overflow: auto;
+				/* Allow scrolling if needed */
+			}
+
+			.dashboard-container {
+				background: #ffffff;
+				padding: 40px;
+				border-radius: 12px;
+				box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+				width: 100%;
+				/* Full width */
+				max-width: 1200px;
+				/* Maximum width to prevent stretching too much */
+				box-sizing: border-box;
+				/* Ensure padding is included in width calculation */
+				animation: fadeIn 1s ease-in-out;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			h2 {
+				margin-bottom: 30px;
+				color: #333;
+				font-size: 32px;
+				text-align: center;
+			}
+
+			.card {
+				background: #f9f9f9;
+				border-radius: 8px;
+				padding: 20px;
+				margin: 15px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				transition: transform 0.3s, box-shadow 0.3s;
+			}
+
+			.card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+			}
+
+			.card h3 {
+				margin: 0 0 10px 0;
+				font-size: 24px;
+			}
+
+			.card p {
+				font-size: 16px;
+				color: #555;
+			}
+
+			.card i {
+				color: #007bff;
+				font-size: 2rem;
+			}
+			.logout-btn {
+				text-align: center;
+				border-radius: 8px;
+				transition: background 0.3s ease;
+			}
+
+			.logout-btn:hover {
+				background-color: #e60000;
+			}
+			#logout-btn:hover {
+				background-color: #df2121;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="sidebar">
+			<div>
+				<h2>Teacher Panel</h2>
+				<a
+					href="{{ url_for('teacher_dashboard') }}"
+					class="option-button"
+					>Teacher Dashboard</a
+				>
+				<a href="{{ url_for('teacher_panel') }}" class="option-button"
+					>Start Paper Checking</a
+				>
+				<a href="{{ url_for('teacher_results') }}" class="option-button"
+					>Results Summary</a
+				>
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<a
+					href="{{ url_for('logout') }}"
+					class="option-button logout-btn"
+					id="logout-btn"
+				>
+					Logout
+				</a>
+			</div>
+		</div>
+		<div class="main-content">
+			<div class="dashboard-container">
+				<h2>Dashboard</h2>
+				<div class="card">
+					<i class="fa-solid fa-check-circle"></i>
+					<h3>Ongoing Checkings</h3>
+					<p>View and manage your current paper checking sessions.</p>
+				</div>
+				<div class="card">
+					<i class="fa-solid fa-calendar-check"></i>
+					<h3>Completed Checkings</h3>
+					<p>
+						Review the papers that have been checked and processed.
+					</p>
+				</div>
+				<div class="card">
+					<i class="fa-solid fa-chart-line"></i>
+					<h3>Performance Reports</h3>
+					<p>
+						Generate and view performance reports for your students.
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Teacher Panel - Paper Checking</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='teacher_panel.css') }}"
+		/>
+	</head>
+
+	<body>
+		<div class="sidebar">
+			<div>
+				<h2>Teacher Panel</h2>
+				<a
+					href="{{ url_for('teacher_dashboard') }}"
+					class="option-button"
+					>Teacher Dashboard</a
+				>
+				<a href="{{ url_for('teacher_panel') }}" class="option-button"
+					>Start Paper Checking</a
+				>
+				<a href="{{ url_for('teacher_results') }}" class="option-button"
+					>Results Summary</a
+				>
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<a
+					href="{{ url_for('logout') }}"
+					class="option-button logout-btn"
+					id="logout-btn"
+				>
+					Logout
+				</a>
+			</div>
+		</div>
+		<div class="main-content">
+			<div class="panel-container">
+				<div class="main-card">
+					<br /><br /><br /><br /><br />
+					<div class="main-card-header">Paper Checking Form</div>
+					<br />
+					<form
+						id="upload-form"
+						action="{{ url_for('upload_answer_sheets') }}"
+						method="post"
+						enctype="multipart/form-data"
+					>
+						<div class="card">
+							<div class="card-header">Upload Question Paper</div>
+							<div class="form-group">
+								<i class="fa-solid fa-file"></i>
+								<label for="question-paper"
+									>Select Question Paper:</label
+								>
+								<input
+									type="file"
+									id="question-paper"
+									name="question-paper"
+									accept=".pdf,.jpg,.jpeg,.png,.txt"
+									required
+								/>
+							</div>
+							<center>
+								<button
+									type="button"
+									id="upload-question-paper-button"
+									style="
+										background-color: #007bff;
+										color: white;
+										margin-top: 10px;
+									"
+								>
+									Upload Question Paper
+								</button>
+							</center>
+						</div>
+
+						<div class="card">
+							<div class="card-header">Choose Upload Method</div>
+							<div class="radio-group">
+								<label>
+									<input
+										type="radio"
+										name="upload-method"
+										value="upload"
+										checked
+										onclick="toggleUploadButton()"
+									/>
+									Upload Answer Sheets
+								</label>
+								<label>
+									<input
+										type="radio"
+										name="upload-method"
+										value="scan"
+										onclick="toggleUploadButton()"
+									/>
+									Scan Answer Sheets
+								</label>
+							</div>
+						</div>
+
+						<div id="upload-section">
+							<div class="card" id="upload-card">
+								<div class="card-header">
+									Upload Answer Sheets
+								</div>
+								<div class="form-group">
+									<i class="fa-solid fa-upload"></i>
+									<label for="answer-sheets"
+										>Select Answer Sheets:</label
+									>
+									<input
+										type="file"
+										id="answer-sheets"
+										name="answer-sheets[]"
+										multiple
+										accept=".pdf,.jpg,.jpeg,.png,.txt"
+									/>
+								</div>
+							</div>
+
+							<div class="card hidden" id="scan-card">
+								<div class="card-header">
+									Scan Answer Sheets
+								</div>
+								<div class="form-group">
+									<i class="fa-solid fa-camera"></i>
+									<label for="scan-button"
+										>Click to Scan Answer Sheets:</label
+									>
+									<button type="button" id="scan-button">
+										Scan Answer Sheets
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<center>
+							<button
+								type="button"
+								id="upload-answer-sheets-button"
+							>
+								Upload Answer Sheets
+							</button>
+						</center>
+						<br /><br /><br />
+						<center>
+							<button
+								type="button"
+								id="start-checking-sheets-button"
+								style="background-color: green"
+							>
+								Start Checking Sheets
+							</button>
+						</center>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div id="popup" class="popup hidden">
+			<div class="popup-content">
+				<span class="popup-close hidden">&times;</span>
+				<div id="popup-message" class="popup-message">
+					<div id="spinner" class="spinner hidden"></div>
+					<div id="popup-text">Uploading...</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="{{ url_for('static', filename='teacher_panel.js') }}"></script>
+	</body>
+</html>

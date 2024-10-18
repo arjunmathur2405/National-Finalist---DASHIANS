@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Teacher Panel - Results Summary</title>
+		<style>
+			body {
+				display: flex;
+				height: 100vh;
+				margin: 0;
+				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+				background-color: #f4f7fc;
+			}
+
+			.sidebar {
+				width: 250px;
+				background-color: #007bff;
+				color: white;
+				padding: 20px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+			}
+
+			.sidebar h2 {
+				margin-bottom: 30px;
+				font-size: 24px;
+				text-align: center;
+				letter-spacing: 1px;
+			}
+
+			.sidebar a {
+				text-decoration: none;
+				color: white;
+				padding: 12px;
+				display: block;
+				margin: 10px 0;
+				border-radius: 8px;
+				font-size: 16px;
+				transition: background-color 0.3s ease, transform 0.3s ease;
+			}
+
+			.sidebar a:hover {
+				background-color: #0056b3;
+				transform: scale(1.05);
+			}
+
+			.main-content {
+				flex: 1;
+				padding: 40px;
+				background-color: #ffffff;
+				box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+				border-radius: 10px;
+				margin: 20px;
+				overflow-y: auto;
+				animation: fadeIn 1s ease-in-out;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(10px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			h2 {
+				font-size: 28px;
+				color: #333;
+				margin-bottom: 20px;
+				border-bottom: 2px solid #007bff;
+				padding-bottom: 10px;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+				animation: fadeIn 1s ease-in-out;
+			}
+
+			table,
+			th,
+			td {
+				border: 1px solid #ddd;
+			}
+
+			th,
+			td {
+				padding: 15px;
+				text-align: left;
+			}
+
+			th {
+				background-color: #007bff;
+				color: white;
+				font-size: 18px;
+			}
+
+			tr:hover {
+				background-color: #f1f1f1;
+				cursor: pointer;
+				transform: scale(1.01);
+			}
+
+			/* Reduce width of Hash Generated column */
+			th:nth-child(4),
+			td:nth-child(4) {
+				width: 150px; /* Adjust as needed */
+				word-wrap: break-word;
+			}
+
+			a.option-button {
+				display: inline-block;
+				padding: 12px 20px;
+				font-size: 16px;
+				border-radius: 8px;
+				color: white;
+				background-color: #007bff;
+				text-decoration: none;
+				transition: background-color 0.3s ease, transform 0.3s ease;
+			}
+
+			a.option-button:hover {
+				background-color: #0056b3;
+				transform: translateY(-3px);
+			}
+
+			.logout-btn {
+				background-color: #ff4d4d;
+				text-align: center;
+				border-radius: 8px;
+				transition: background 0.3s ease;
+			}
+
+			.logout-btn:hover {
+				background-color: #e60000;
+			}
+
+			#logout-btn:hover {
+				background-color: #df2121;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="sidebar">
+			<div>
+				<h2>Teacher Panel</h2>
+				<a
+					href="{{ url_for('teacher_dashboard') }}"
+					class="option-button"
+				>
+					Teacher Dashboard
+				</a>
+				<a href="{{ url_for('teacher_panel') }}" class="option-button">
+					Start Paper Checking
+				</a>
+				<a
+					href="{{ url_for('teacher_results') }}"
+					class="option-button"
+				>
+					Results Summary
+				</a>
+			</div>
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			<a
+				href="{{ url_for('logout') }}"
+				class="option-button logout-btn"
+				id="logout-btn"
+			>
+				Logout
+			</a>
+		</div>
+		<div class="main-content">
+			<h2>Results Summary</h2>
+			<table>
+				<tr>
+					<th>Date</th>
+					<th>Email Id</th>
+					<th>Student Id</th>
+					<th>Subject</th>
+					<th>Hash Generated</th>
+					<th>Report</th>
+				</tr>
+				{% for row in results %}
+				<tr>
+					<td>{{ row['Date'] }}</td>
+					<td>{{ row['Email Id'] }}</td>
+					<td>{{ row['Student_id'] }}</td>
+					<td>{{ row['Subject'] }}</td>
+					<td>{{ row['File Hash'] }}</td>
+					<td>
+						<a
+							href="{{ url_for('generate_report', report_path=row['Path']) }}"
+							class="option-button"
+							>Show Report</a
+						>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</body>
+</html>
